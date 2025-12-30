@@ -143,7 +143,7 @@ val projection = arrayOf(
 
 // SQL WHERE clause with placeholder variables
 val selection = "date_modified > ?"
-val selectionArgs = arrayOf("1640995200000")
+val selectionArgs = arrayOf("1640995200000") // Unix timestamp in milliseconds (e.g., Jan 1, 2022)
 
 // Define sort order
 val sortOrder = "date_modified DESC"
