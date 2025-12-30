@@ -135,18 +135,22 @@ Query media files from the device's MediaStore using Kotlin:
 
 ```kotlin
 // Define the columns to retrieve from the media database
-val projection = arrayOf(media-database-columns-to-retrieve)
+val projection = arrayOf(
+    MediaStore.Images.Media._ID,
+    MediaStore.Images.Media.DISPLAY_NAME,
+    MediaStore.Images.Media.DATE_MODIFIED
+)
 
 // SQL WHERE clause with placeholder variables
-val selection = sql-where-clause-with-placeholder-variables
-val selectionArgs = values-of-placeholder-variables
+val selection = "date_modified > ?"
+val selectionArgs = arrayOf("1640995200000")
 
 // Define sort order
-val sortOrder = sql-order-by-clause
+val sortOrder = "date_modified DESC"
 
 // Execute the query
 applicationContext.contentResolver.query(
-    MediaStore.media-type.Media.EXTERNAL_CONTENT_URI,
+    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
     projection,
     selection,
     selectionArgs,
@@ -155,6 +159,11 @@ applicationContext.contentResolver.query(
     while (cursor.moveToNext()) {
         // Use an ID column from the projection to get
         // a URI representing the media item itself.
+        val id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID))
+        val contentUri = ContentUris.withAppendedId(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            id
+        )
     }
 }
 ```
