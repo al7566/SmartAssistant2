@@ -7,10 +7,6 @@ services:
     envVars:
       - key: NODE_VERSION
         value: 18.18.0
-      - key: REACT_APP_NAME
-        value: Construction Assistant
-      - key: REACT_APP_VERSION
-        value: 1.0.0
     headers:
       - path: /*
         name: X-Frame-Options
