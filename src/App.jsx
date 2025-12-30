@@ -383,7 +383,7 @@ const ConstructionAssistant = () => {
                     <li>Steel-toed work boots</li>
                     <li>Work gloves appropriate for task</li>
                     <li>High-visibility vest for roadwork</li>
-                    <li>Hearing protection (&gt;85 dB environments)</li>
+                    <li>Hearing protection ({'>'}85 dB environments)</li>
                     <li>Respirator for dust/chemical exposure</li>
                   </ul>
                 </div>
