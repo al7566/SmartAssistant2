@@ -1,14 +1,34 @@
 # SmartAssistant2
-Fix problem.. rewrite code and deploy
-addhcopilot/fix-npm-commands-separationrun: npm install && npm run dev<manifest>
-  <uses-sdk android:minSdkVersion="5" />
-  ...
-</manifest>VkPhysicalDeviceSamplerYcbcrConversionFeatures::samplerYcbcrConversionSYNC_FDVK_ANDROID_external_memory_android_hardware_buffer# Android 16 features and changes list
 
-<br />
+**SmartAssistant2** is an Android development reference project that serves as a comprehensive guide for Android 16 features and modern Android development practices. This repository provides detailed documentation, code examples, and implementation patterns for developers looking to leverage the latest Android 16 capabilities in their applications.
 
-The following table lists all documented features and behavior changes that might affect app developers. Use this list to find changes that affect you, and then click the corresponding link to read the documentation.  
-AccessibilityCameraConnectivityCore functionalityGraphicsHealth and fitnessInternationalizationDevice form factorsMediaPerformance and batteryPrivacySecurityUser experience and system UINew features and APIsChange (all apps)Change (apps targeting 16+)
+## Table of Contents
+
+- [Overview](#overview)
+- [Android 16 Features Reference](#android-16-features-reference)
+- [Code Examples](#code-examples)
+  - [Android Manifest Configuration](#android-manifest-configuration)
+  - [Vulkan Graphics Features](#vulkan-graphics-features)
+  - [MediaStore Query Example](#mediastore-query-example)
+  - [Points and Level Calculation](#points-and-level-calculation)
+- [Getting Started](#getting-started)
+
+## Overview
+
+This project provides a curated collection of Android 16 features, behavior changes, and APIs. It's designed to help developers:
+
+- Understand new features and APIs introduced in Android 16
+- Identify behavior changes that affect all apps or apps targeting Android 16+
+- Access practical code examples for common Android development scenarios
+- Stay up-to-date with the latest Android development practices
+
+## Android 16 Features Reference
+
+The following table lists all documented features and behavior changes that might affect app developers. Use this list to find changes that affect you, and then click the corresponding link to read the official documentation.
+
+**Categories:** Accessibility • Camera • Connectivity • Core functionality • Graphics • Health and fitness • Internationalization • Device form factors • Media • Performance and battery • Privacy • Security • User experience and system UI
+
+**Change Types:** New features and APIs • Change (all apps) • Change (apps targeting 16+)
 
 |           Category            |            Type             |                                                                                                                                                                                                                                                                                                                                               Name                                                                                                                                                                                                                                                                                                                                               |
 |-------------------------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -66,13 +86,71 @@ AccessibilityCameraConnectivityCore functionalityGraphicsHealth and fitnessInter
 | Accessibility                 | New features and APIs       | [Improved accessibility APIs](https://developer.android.com/about/versions/16/features#a11y-apis) Android 16 adds additional APIs to enhance UI semantics that help improve consistency for users that rely on accessibility services, such as[TalkBack](https://developer.android.com/guide/topics/ui/accessibility/testing#talkback).                                                                                                                                                                                                                                                                                                                                                          |
 | Accessibility                 | New features and APIs       | [Phone as microphone input for voice calls with LEA hearing aids](https://developer.android.com/about/versions/16/features#lea-phone-input) Android 16 adds the capability for users of LE Audio hearing aids to switch between the built-in microphones on the hearing aids and the microphone on their phone for voice calls.                                                                                                                                                                                                                                                                                                                                                                  |
 | Accessibility                 | New features and APIs       | [Ambient volume controls for LEA hearing aids](https://developer.android.com/about/versions/16/features#lea-ambient-volume) Android 16 adds the capability for users of LE Audio hearing aids to adjust the volume of ambient sound that is picked up by the hearing aid's microphones.                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Graphics                      | New features and APIs       | [Custom graphical effects with AGSL](https://developer.android.com/about/versions/16/features#agsl) Android 16 adds[`RuntimeColorFilter`](https://developer.android.com/reference/android/graphics/RuntimeColorFilter)and[`RuntimeXfermode`](https://developer.android.com/reference/android/graphics/RuntimeXfermode), allowing you to author complex effects like Threshold, Sepia, and Hue Saturation and apply them to draw calls.                                                                                                                                                                                                                                                           |val projection = arrayOf(media-database-columns-to-retrieve)
-val selection = sql-where-clause-with-placeholder-variables
-val selectionArgs = values-of-placeholder-variables
-val sortOrder = sql-order-by-clause
+| Graphics                      | New features and APIs       | [Custom graphical effects with AGSL](https://developer.android.com/about/versions/16/features#agsl) Android 16 adds[`RuntimeColorFilter`](https://developer.android.com/reference/android/graphics/RuntimeColorFilter)and[`RuntimeXfermode`](https://developer.android.com/reference/android/graphics/RuntimeXfermode), allowing you to author complex effects like Threshold, Sepia, and Hue Saturation and apply them to draw calls.                                                                                                                                                                                                                                                           |
 
+---
+
+## Code Examples
+
+This section provides practical code examples for common Android development scenarios referenced in SmartAssistant2.
+
+### Android Manifest Configuration
+
+Configure your Android application's minimum SDK version in your `AndroidManifest.xml`:
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.smartassistant2">
+    
+    <uses-sdk android:minSdkVersion="5" />
+    
+    <!-- Additional manifest configurations -->
+    
+</manifest>
+```
+
+**Note:** While API level 5 is shown for reference, modern applications should target significantly higher API levels to access current Android features.
+
+### Vulkan Graphics Features
+
+SmartAssistant2 demonstrates Vulkan graphics capabilities, including YCbCr conversion features for advanced image processing:
+
+```c
+// Vulkan physical device feature for YCbCr conversion
+VkPhysicalDeviceSamplerYcbcrConversionFeatures ycbcrFeatures = {
+    .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES,
+    .samplerYcbcrConversion = VK_TRUE
+};
+
+// Related Android hardware buffer support
+// VK_ANDROID_external_memory_android_hardware_buffer
+// SYNC_FD for synchronization
+```
+
+**Use Case:** YCbCr conversion is essential for video processing, camera preview rendering, and efficient media playback in Android applications.
+
+### MediaStore Query Example
+
+Query media files from the device's MediaStore using Kotlin:
+
+```kotlin
+// Define the columns to retrieve from the media database
+val projection = arrayOf(
+    MediaStore.Images.Media._ID,
+    MediaStore.Images.Media.DISPLAY_NAME,
+    MediaStore.Images.Media.DATE_MODIFIED
+)
+
+// SQL WHERE clause with placeholder variables
+val selection = "date_modified > ?"
+val selectionArgs = arrayOf("1640995200000") // Unix timestamp in milliseconds (e.g., Jan 1, 2022)
+
+// Define sort order
+val sortOrder = "date_modified DESC"
+
+// Execute the query
 applicationContext.contentResolver.query(
-    MediaStore.media-type.Media.EXTERNAL_CONTENT_URI,
+    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
     projection,
     selection,
     selectionArgs,
@@ -81,6 +159,58 @@ applicationContext.contentResolver.query(
     while (cursor.moveToNext()) {
         // Use an ID column from the projection to get
         // a URI representing the media item itself.
+        val id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID))
+        val contentUri = ContentUris.withAppendedId(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            id
+        )
     }
-}const POINTS_PER_LEVEL = 500;
+}
+```
+
+**Note:** When targeting Android 16+, be aware of the [MediaStore version lockdown](#android-16-features-reference) behavior change that makes `MediaStore#getVersion()` unique to each app.
+
+### Points and Level Calculation
+
+Calculate user levels based on accumulated points (JavaScript example):
+
+```javascript
+const POINTS_PER_LEVEL = 500;
 const newLevel = Math.floor(newTotalPoints / POINTS_PER_LEVEL) + 1;
+```
+
+**Example:** 
+- 0-499 points = Level 1
+- 500-999 points = Level 2
+- 1000-1499 points = Level 3
+- And so on...
+
+---
+
+## Getting Started
+
+To use the code examples and references in this repository:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/al7566/SmartAssistant2.git
+   cd SmartAssistant2
+   ```
+
+2. **Review the Android 16 Features Reference** table above to understand the latest platform changes
+
+3. **Explore the code examples** to see practical implementations
+
+4. **Refer to official Android documentation** via the links provided in the features table for detailed implementation guidance
+
+---
+
+## Additional Resources
+
+- [Android 16 Developer Documentation](https://developer.android.com/about/versions/16)
+- [Android API Reference](https://developer.android.com/reference)
+- [Android Developer Blog](https://android-developers.googleblog.com/)
+
+---
+
+**Note:** This repository is maintained as a reference guide. Always refer to the official Android documentation for the most up-to-date information on Android 16 features and best practices.
