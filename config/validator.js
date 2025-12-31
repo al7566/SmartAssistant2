@@ -16,7 +16,7 @@ const keyFormatValidators = {
   anthropic: (key) => /^sk-ant-[A-Za-z0-9_-]{32,}$/.test(key),
   
   // Google API keys start with 'AIza'
-  google: (key) => /^AIza[A-Za-z0-9_-]{35}$/.test(key),
+  google: (key) => /^AIza[A-Za-z0-9_-]{30,}$/.test(key),
   
   // Twilio Account SID starts with 'AC'
   twilioSid: (key) => /^AC[a-f0-9]{32}$/.test(key),
