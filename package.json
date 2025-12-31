@@ -1,0 +1,34 @@
+{
+  "name": "smart-assistant-2",
+  "version": "1.0.0",
+  "description": "Comprehensive AI-powered Smart Assistant with secure key management",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node src/index.js",
+    "check-keys": "node scripts/check-keys.js",
+    "setup": "node scripts/check-keys.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "ai",
+    "assistant",
+    "voice",
+    "calendar",
+    "security",
+    "automation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "chalk": "^5.3.0",
+    "ora": "^7.0.1",
+    "inquirer": "^9.2.12",
+    "axios": "^1.6.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
